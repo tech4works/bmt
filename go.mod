@@ -1,4 +1,4 @@
-module bmt
+module github.com/tech4works/bmt
 
 go 1.23
 
