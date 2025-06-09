@@ -3,7 +3,10 @@ package bmt
 import (
 	"fmt"
 	"github.com/tech4works/converter"
+	"regexp"
 )
+
+var formatRegex = regexp.MustCompile(`%[^%s]`)
 
 func Sprint(a ...any) string {
 	return fmt.Sprint(parse(a...)...)
@@ -14,7 +17,11 @@ func Sprintln(a ...any) string {
 }
 
 func Sprintf(format string, a ...any) string {
-	return fmt.Sprintf(format, parse(a...)...)
+	return fmt.Sprintf(replaceFormatSpecifiers(format), parse(a...)...)
+}
+
+func replaceFormatSpecifiers(format string) string {
+	return formatRegex.ReplaceAllString(format, "%s")
 }
 
 func parse(a ...any) []any {
