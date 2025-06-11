@@ -27,6 +27,7 @@ func replaceFormatSpecifiers(format string) string {
 func parse(a ...any) []any {
 	s := make([]any, len(a))
 	for i, v := range a {
+
 		vs, err := converter.ToStringWithErr(v)
 		if err != nil {
 			vs = fmt.Sprint(v)
